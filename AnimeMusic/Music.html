@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+	<title>
+		Relax Just Listen - Anime Music
+	</title>
+</head>
+<body>
+	<header>
+	<div class="nav-bar">
+		<img src="logo.jpg" class="logo">
+	<ul class="menu">
+		<li><a href="index.html">Play Music</a>
+		</ul>
+	</div>
+	<div class="Music">
+		<center>
+			<audio src="" controls id="audioPlayer">Sorry.</audio>
+		</center>
+			<ul id="playlist">
+				<li class="current-song"><a href="Music/you can be king again.mp3">You can be king again</a></li>
+				<br><br>
+				<li><a href="Music/DAOKO 米津玄師打上花火MUSIC VIDEO.mp3">DAOKO 米津玄師打上花火</a></li>
+				<br><br>
+				<li><a href="Music/Lil Boom - Already Dead instrumental (Omae Wa Mou) (prod. deadman 死人) NOW ON ALL PLATFORMS.mp3">Lil Boom - Already Dead instrumental</a></li>
+				<br><br>
+				<li><a href="Music/cinnamons evening cinema - summertime.mp3">cinnamons evening cinema - summertime</a></li>
+				<br><br>
+				<li><a href="Music/Nanatsu no taizai Opening 1.mp3">Nanatsu no taizai Opening 1.mp3</a></li>
+				<br><br>
+				<li><a href="Music/Renai Circulation.mp3">Renai Circulation</a></li>
+			</ul>
+			<script src="https://code.jquery.com/jquery-2.2.0.js">
+			</script>
+			<script>
+			audioPlayer();
+			function audioPlayer(){
+				$("#audioPlayer")[0].src = $("playlist li a")[0];
+				$("#audioPlayer")[0].play();
+				$("#playlist li a").click(function(e){
+					e.preventDefault();
+					$("#audioPlayer")[0].src = this;
+					$("#audioPlayer")[0].play();
+					$("#playlist li").removeClass("current-song");
+					 currentSong = $(this).parent().index();
+					 $(this).parent().addClass("current-song");
+				});
+				$("#audioPlayer")[0].addEventListener("ended", function(){
+					currentSong++;
+					if(currentSong == $("#playlist li a").length)
+						currentSong = 0;
+					$("#playlist li").removeClass("current-song");
+					$("#playlist li:eq("+currentSong+")").addClass("current-song");
+					$("#audioPlayer")[0].src = $("#playlist li a")[currentSong].href;
+					$("#audioPlayer")[0].play();
+					});
+				}
+			
+			</script>
+	</div>
+	
+</body>
+</html>
